@@ -82,7 +82,7 @@ class TgUploader:
             self._thumb = None
 
     async def _msg_to_reply(self):
-        if self._listener.upDest:
+'''        if self._listener.upDest:
             msg = (
                 self._listener.message.link
                 if self._listener.isSuperChat
@@ -118,8 +118,8 @@ class TgUploader:
                     disable_web_page_preview=True,
                     disable_notification=True,
                 )
-        else:
-            self._sent_msg = self._listener.message
+        else:'''    
+        self._sent_msg = self._listener.message
         return True
 
     async def _prepare_file(self, file_, dirpath, delete_file):
@@ -228,9 +228,9 @@ class TgUploader:
 
     async def upload(self, o_files, ft_delete):
         await self._user_settings()
-        #res = await self._msg_to_reply()
-        #if not res:
-        #    return
+        res = await self._msg_to_reply()
+        if not res:
+            return
         for dirpath, _, files in natsorted(await sync_to_async(walk, self._path)):
             if dirpath.endswith("/yt-dlp-thumb"):
                 continue
