@@ -83,12 +83,12 @@ class TgUploader:
 
     async def _msg_to_reply(self):
         if self._listener.upDest:
-            msg = (
-                re_findall("https?:\/\/[^\s/$.?#].[^\s]*",self._listener.message.text)[0]
-                #self._listener.message.link
-                if self._listener.isSuperChat
-                else self._listener.message.text.lstrip("/")
-            )
+            try:
+                msg = re_findall("https?:\/\/[^\s/$.?#].[^\s]*",self._listener.message.text)[0]
+            except:
+                msg = self._listener.message.link
+            #if self._listener.isSuperChat
+            #else self._listener.message.text.lstrip("/")
             try:
                 if self._user_session:
                     self._sent_msg = await user.send_message(
