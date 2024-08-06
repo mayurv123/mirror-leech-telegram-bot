@@ -82,7 +82,7 @@ class TgUploader:
             self._thumb = None
 
     async def _msg_to_reply(self):
-'''        if self._listener.upDest:
+        '''if self._listener.upDest:
             msg = (
                 self._listener.message.link
                 if self._listener.isSuperChat
