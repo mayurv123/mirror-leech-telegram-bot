@@ -231,6 +231,7 @@ class TgUploader:
         res = await self._msg_to_reply()
         if not res:
             return
+        isDeleted = False
         for dirpath, _, files in natsorted(await sync_to_async(walk, self._path)):
             if dirpath.endswith("/yt-dlp-thumb"):
                 continue
@@ -286,6 +287,9 @@ class TgUploader:
                     self._last_msg_in_group = False
                     self._last_uploaded = 0
                     await self._upload_file(cap_mono, file_, f_path)
+                    if self._sent_msg and not isDeleted
+                        await deleteMessage(self._sent_msg)
+                        isDeleted = True
                     if self._listener.isCancelled:
                         return
                     if (
