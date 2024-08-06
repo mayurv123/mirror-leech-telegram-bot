@@ -228,9 +228,9 @@ class TgUploader:
 
     async def upload(self, o_files, ft_delete):
         await self._user_settings()
-        res = await self._msg_to_reply()
-        if not res:
-            return
+        #res = await self._msg_to_reply()
+        #if not res:
+        #    return
         for dirpath, _, files in natsorted(await sync_to_async(walk, self._path)):
             if dirpath.endswith("/yt-dlp-thumb"):
                 continue
