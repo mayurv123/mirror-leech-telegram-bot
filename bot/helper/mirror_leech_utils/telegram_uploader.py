@@ -12,7 +12,7 @@ from natsort import natsorted
 from os import walk, path as ospath
 from pyrogram.errors import FloodWait, RPCError
 from pyrogram.types import InputMediaVideo, InputMediaDocument, InputMediaPhoto
-from re import match as re_match, sub as re_sub
+from re import match as re_match, sub as re_sub, findall as re_findall
 from tenacity import (
     retry,
     wait_exponential,
@@ -83,7 +83,11 @@ class TgUploader:
 
     async def _msg_to_reply(self):
         if self._listener.upDest:
-            msg = "PRT"
+            msg_link = re_findall("https?:\/\/[^\s/$.?#].[^\s]*",self._listener.message.text)
+            if msg_link:
+                msg = msg_link
+            else:
+                msg = self._listener.message.text.lstrip("/")
             #self._listener.message.link
             #if self._listener.isSuperChat
             #else self._listener.message.text.lstrip("/")
