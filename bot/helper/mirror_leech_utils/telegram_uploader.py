@@ -83,7 +83,7 @@ class TgUploader:
 
     async def _msg_to_reply(self):
         if self._listener.upDest:
-            msg_link = re_findall("https?:\/\/[^\s/$.?#].[^\s]*",self._listener.message.text)
+            msg_link = re_findall("https?:\/\/[^\s/$.?#].[^\s]*",self._listener.message.text)[0]
             if msg_link:
                 msg = msg_link
             else:
