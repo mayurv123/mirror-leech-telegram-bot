@@ -287,7 +287,7 @@ class TgUploader:
                     self._last_msg_in_group = False
                     self._last_uploaded = 0
                     await self._upload_file(cap_mono, file_, f_path)
-                    if self._sent_msg and not isDeleted
+                    if self._sent_msg and not isDeleted:
                         await deleteMessage(self._sent_msg)
                         isDeleted = True
                     if self._listener.isCancelled:
